@@ -4,8 +4,12 @@ class users {
 
     async registrationUser(req,res) {
         console.log(req)
-
     }
+
+    async loginUser(req,res) {
+        console.log(req)
+    }
+
     async getUser(req,res) {
         console.log(req)
     }

@@ -1,5 +1,6 @@
 const express = require("express");
 const asyncHandler = require('express-async-handler')
+const cors = require('cors');
 const app = express();
 const path = require('path');
 ABSPATH = __dirname + path.sep;
@@ -9,7 +10,7 @@ const routes = require('./routes')
 const controllers = require('./controllers')
 Object.entries(routes).forEach(([name, func])=> {
     const obj = {
-        doRegisterRoute: function (method,routeSegment,authenticationFunction,validationFunction,controllerFunction   ) {
+        doRegisterRoute: function (method,routeSegment,authenticationFunction,validationFunction,controllerFunction ) {
             const functions = []
             if(authenticationFunction) functions.push(asyncHandler(authenticationFunction))
             if(validationFunction) functions.push(asyncHandler(validationFunction))
@@ -25,6 +26,7 @@ Object.entries(routes).forEach(([name, func])=> {
 })
 
 //CORS
+app.use(cors());
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
